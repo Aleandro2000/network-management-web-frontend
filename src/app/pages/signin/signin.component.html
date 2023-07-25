@@ -12,6 +12,9 @@
                         <div class="form-group mt-2">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
+                            <div *ngIf="password?.errors?.pattern" class="text-danger my-2">
+                                {{messages.PASSWORD_ERROR_REQUIRED}}
+                            </div>
                         </div>
                         <div class="center">
                             <button type="submit" class="btn btn-dark mt-4">Sign In</button>

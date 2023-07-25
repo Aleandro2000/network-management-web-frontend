@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { emailRegex, passwordRegex } from 'src/app/utils/regex';
 
 @Component({
   selector: 'app-signup',
@@ -8,8 +9,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   signupForm = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl(""),
+    email: new FormControl("", Validators.pattern(emailRegex)),
+    password: new FormControl("", Validators.pattern(passwordRegex)),
   })
 
   constructor() { }
