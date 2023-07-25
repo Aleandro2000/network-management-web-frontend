@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { displayToast } from 'src/app/utils/alerts';
 import { messages } from 'src/app/utils/messages';
 import { emailRegex } from 'src/app/utils/regex';
+import { setSession } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-signin',
@@ -11,8 +13,8 @@ import { emailRegex } from 'src/app/utils/regex';
 })
 export class SigninComponent implements OnInit {
   signinForm = new FormGroup({
-    email: new FormControl("", Validators.pattern(emailRegex)),
-    password: new FormControl("", Validators.required),
+    email: new FormControl("", [Validators.pattern(emailRegex)]),
+    password: new FormControl("", [Validators.required]),
   });
   messages = messages;
 
@@ -35,8 +37,9 @@ export class SigninComponent implements OnInit {
   onSignin(): void {
     if (!this.signinForm.invalid) {
       this.authService.signInService(this.signinForm.get("email")?.value, this.signinForm.get("password")?.value).subscribe(
-        data => {
-          
+        response => {
+          displayToast(messages.SIGN_IN_SUCCESSFULLY);
+          setSession("jwt", response?.jwt);
         }
       );
     }

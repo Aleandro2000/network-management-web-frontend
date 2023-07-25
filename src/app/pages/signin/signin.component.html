@@ -4,10 +4,13 @@
             <div class="card">
                 <div class="card-header">Login</div>
                 <div class="card-body">
-                    <form [formGroup]="signinForm" (ngSubmit)="onSignin">
+                    <form [formGroup]="signinForm" (ngSubmit)="onSignin()">
                         <div class="form-group mt-2">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required>
+                            <div *ngIf="email?.errors?.pattern" class="text-danger my-2">
+                                {{messages.EMAIL_ERROR_VALIDATION}}
+                            </div>
                         </div>
                         <div class="form-group mt-2">
                             <label for="password">Password</label>
