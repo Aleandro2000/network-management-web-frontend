@@ -5,6 +5,7 @@ import { displayToast } from 'src/app/utils/alerts';
 import { messages } from 'src/app/utils/messages';
 import { emailRegex } from 'src/app/utils/regex';
 import { setSession } from 'src/app/utils/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -13,7 +14,7 @@ import { setSession } from 'src/app/utils/utils';
 })
 export class SigninComponent implements OnInit {
   signinForm = new FormGroup({
-    email: new FormControl("", [Validators.pattern(emailRegex)]),
+    email: new FormControl("", [Validators.required, Validators.pattern(emailRegex)]),
     password: new FormControl("", [Validators.required]),
   });
   messages = messages;
@@ -28,6 +29,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
   ) {
   }
 
@@ -40,8 +42,14 @@ export class SigninComponent implements OnInit {
         response => {
           displayToast(messages.SIGN_IN_SUCCESSFULLY);
           setSession("jwt", response?.jwt);
+          this.router.navigate(["dashboard"]);
+        },
+        _error => {
+          displayToast(messages.SIGN_IN_FAILED, false);
         }
       );
+    } else {
+      displayToast(messages.SIGN_IN_FAILED, false);
     }
   }
 }

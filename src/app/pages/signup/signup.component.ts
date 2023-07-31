@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { displayToast } from 'src/app/utils/alerts';
+import { messages } from 'src/app/utils/messages';
 import { emailRegex, passwordRegex } from 'src/app/utils/regex';
 
 @Component({
@@ -9,17 +13,43 @@ import { emailRegex, passwordRegex } from 'src/app/utils/regex';
 })
 export class SignupComponent implements OnInit {
   signupForm = new FormGroup({
-    email: new FormControl("", Validators.pattern(emailRegex)),
-    password: new FormControl("", Validators.pattern(passwordRegex)),
+    email: new FormControl("", [Validators.required, Validators.pattern(emailRegex)]),
+    password: new FormControl("", [Validators.required, Validators.pattern(passwordRegex)]),
   })
+  messages = messages;
 
-  constructor() { }
+  get email() {
+    return this.signupForm.get("email");
+  }
+  
+  get password() {
+    return this.signupForm.get("password");
+  }
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
   onSignup(): void {
-
+    if (!this.signupForm.invalid) {
+      this.authService.signUpService(this.signupForm.get("email")?.value, this.signupForm.get("password")?.value).subscribe(
+        _response => {
+          displayToast(messages.SIGN_UP_SUCCESSFULLY);
+          this.router.navigate(["signin"]);
+        },
+        _error => {
+          alert(_error.message)
+          displayToast(messages.SIGN_UP_FAILED, false);
+        }
+      );
+    } else {
+      displayToast(messages.SIGN_UP_FAILED, false);
+    }
   }
 
 }

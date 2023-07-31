@@ -2,19 +2,26 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Login</div>
+                <div class="card-header font-weight-bold">Register</div>
                 <div class="card-body">
-                    <form [formGroup]="signupForm" (ngSubmit)="onSignup">
+                    <div class="d-flex justify-content-end">
+                        <a routerLink="/signin">
+                            <button type="button" class="btn btn-dark">
+                                Login
+                            </button>
+                        </a>
+                    </div>
+                    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
                         <div class="form-group mt-2">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" formControlName="email" required>
                         </div>
                         <div class="form-group mt-2">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" formControlName="password" required>
                         </div>
                         <div class="center">
-                            <button type="submit" class="btn btn-dark mt-4">Sign In</button>
+                            <button type="submit" class="btn btn-dark mt-4">Sign Up</button>
                         </div>
                     </form>
                 </div>
