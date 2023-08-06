@@ -43,7 +43,6 @@ export class SignupComponent implements OnInit {
           this.router.navigate(["signin"]);
         },
         _error => {
-          alert(_error.message)
           displayToast(messages.SIGN_UP_FAILED, false);
         }
       );

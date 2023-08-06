@@ -6,16 +6,21 @@ import { getSession } from '../utils/utils';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate {
-  constructor(private router: Router) {}
+export class NetworkServicesGuardGuard implements CanActivate {
+  constructor(
+    private router: Router,
+  ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (getSession("jwt")) {
+    if (getSession("jwt") && getSession("serviceTicket")) {
       return true;
     }
-    return this.router.navigate(['/']);
+    if (!getSession("setviceTicket")) {
+      return this.router.navigate(["network-controller"]);
+    }
+    return this.router.navigate(["signin"]);
   }
 
 }

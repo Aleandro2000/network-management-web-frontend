@@ -13,7 +13,7 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
-  signInService(email: string, password: string){
+  signInService(email: string, password: string) {
     return this.http.post<SignInInterface>(`${environment.publicApiUrl}/user/sign_in`, {
       email,
       password,
