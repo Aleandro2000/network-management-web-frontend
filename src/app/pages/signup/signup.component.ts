@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   get email() {
     return this.signupForm.get("email");
   }
-  
+
   get password() {
     return this.signupForm.get("password");
   }
@@ -38,9 +38,13 @@ export class SignupComponent implements OnInit {
   onSignup(): void {
     if (!this.signupForm.invalid) {
       this.authService.signUpService(this.signupForm.get("email")?.value, this.signupForm.get("password")?.value).subscribe(
-        _response => {
-          displayToast(messages.SIGN_UP_SUCCESSFULLY);
-          this.router.navigate(["signin"]);
+        (response: any) => {
+          if (response?.data) {
+            displayToast(messages.SIGN_UP_SUCCESSFULLY);
+            this.router.navigate(["signin"]);
+          } else {
+            displayToast(messages.SIGN_UP_FAILED_EXISTS, false);
+          }
         },
         _error => {
           displayToast(messages.SIGN_UP_FAILED, false);
