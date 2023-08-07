@@ -17,7 +17,7 @@ export class PublicGuardGuard implements CanActivate {
       if (!getSession("jwt")) {
         return true;
       }
-      return this.router.navigate(['/network-controller']);
+      return this.router.navigate(['/dashboard']);
   }
   
 }

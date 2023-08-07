@@ -42,7 +42,7 @@ export class SigninComponent implements OnInit {
         response => {
           displayToast(messages.SIGN_IN_SUCCESSFULLY);
           setSession("jwt", response?.jwt);
-          this.router.navigate(["network-controller"]);
+          this.router.navigate(["dashboard"]);
         },
         _error => {
           displayToast(messages.SIGN_IN_FAILED, false);
