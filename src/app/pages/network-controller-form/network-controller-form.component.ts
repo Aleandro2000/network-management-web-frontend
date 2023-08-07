@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NetworkControllerFormService } from 'src/app/services/network-controller-form.service';
+import { displayToast } from 'src/app/utils/alerts';
 import { setSession } from 'src/app/utils/utils';
 
 @Component({
@@ -11,7 +12,7 @@ import { setSession } from 'src/app/utils/utils';
 })
 export class NetworkControllerFormComponent implements OnInit {
   networkForm = new FormGroup({
-    email: new FormControl("", [Validators.required]),
+    username: new FormControl("", [Validators.required]),
     password: new FormControl("", [Validators.required]),
   });
 
@@ -28,6 +29,9 @@ export class NetworkControllerFormComponent implements OnInit {
       (result: any) => {
         setSession("serviceTicket", result?.response?.serviceTicket);
         this.router.navigate(["dashboard"]);
+      },
+      (_error: any) => {
+        displayToast("Something is wrong! :(", false);
       }
     );
   }
