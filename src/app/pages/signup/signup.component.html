@@ -8,14 +8,14 @@
                 </div>
                 <div class="card-body">
                     <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" formControlName="email" required />
                             <div *ngIf="email?.value && email?.errors" class="text-danger mt-1">
                                 {{ messages.EMAIL_ERROR_VALIDATION }}
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-4">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" formControlName="password"
                                 required />
