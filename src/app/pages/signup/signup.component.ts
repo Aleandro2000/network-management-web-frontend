@@ -47,6 +47,7 @@ export class SignupComponent implements OnInit {
           }
         },
         _error => {
+          alert(JSON.stringify(_error.message))
           displayToast(messages.SIGN_UP_FAILED, false);
         }
       );

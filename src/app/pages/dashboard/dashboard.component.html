@@ -1,0 +1,33 @@
+<div style="text-align: right;">
+  <button (click)="onLogout()" class="btn btn-primary m-3">
+    LOGOUT
+  </button>
+</div>
+<div class="my-5">
+  <h2 class="text-center"><b>Device Table</b></h2>
+  <div class="table-responsive container mt-5">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Device Interface</th>
+          <th>IP</th>
+          <th>Device Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let device of devices">
+          <td>{{ device.deviceInterface }}</td>
+          <td>{{ device.ip }}</td>
+          <td>{{ device.deviceName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="text-center">
+  <a href="http://localhost:58000/#/">
+    <button class="btn btn-primary">
+      SEE MORE DETAILS
+    </button>
+  </a>
+</div>

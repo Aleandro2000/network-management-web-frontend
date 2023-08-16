@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,11 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  devices: any[] = [];
 
-  constructor() { }
+  constructor(
+    private deviceService: DeviceService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
-    window.location.href = "http://localhost:58000/#";
+    this.deviceService.getDevices().subscribe((data: any) => {
+      this.devices = data?.result;
+    });
+  }
+
+  onLogout(): void {
+    sessionStorage.clear();
+    this.router.navigate(["signin"]);
   }
 
 }
