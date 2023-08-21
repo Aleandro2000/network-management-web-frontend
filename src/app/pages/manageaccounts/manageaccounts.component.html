@@ -1,0 +1,37 @@
+<div style="text-align: right;">
+  <a routerLink="/dashboard" class="btn btn-primary m-3">
+    DASHBOARD
+  </a>
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Manager
+        </div>
+        <div class="card-body">
+          <form [formGroup]="manageAccountsForm" (ngSubmit)="onSignup()">
+            <div class="form-group mt-2">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email" required />
+              <div *ngIf="email?.value && email?.errors" class="text-danger mt-1">
+                {{ messages.EMAIL_ERROR_VALIDATION }}
+              </div>
+            </div>
+            <div class="form-group mt-4">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password" required />
+              <div *ngIf="password?.value && password?.errors" class="text-danger mt-1">
+                {{ messages.PASSWORD_ERROR_REQUIRED }}
+              </div>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceService } from 'src/app/services/device.service';
+import { displayToast } from 'src/app/utils/alerts';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +17,14 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.deviceService.getDevices().subscribe((data: any) => {
-      this.devices = data?.result;
-    });
+    this.deviceService.getOrAddDevices(0, 0).subscribe(
+      (data: any) => {
+        this.devices = data?.result;
+      },
+      (_error) => {
+        displayToast("ERROR", false);
+      }
+    );
   }
 
   onLogout(): void {

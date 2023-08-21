@@ -1,0 +1,31 @@
+<div style="text-align: right;">
+  <a routerLink="/dashboard" class="btn btn-primary m-3">
+    DASHBOARD
+  </a>
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Manager
+        </div>
+        <div class="card-body">
+          <p>Selected User</p>
+          <select class="form-select" [(ngModel)]="userId">
+            <option value="0">NONE</option>
+            <option *ngFor="let option of users" [value]="option?.id">{{ option?.email }}</option>
+          </select>
+          <p>Selected Device</p>
+          <select class="form-select" [(ngModel)]="deviceId">
+            <option value="0" [defaultSelected]="true">NONE</option>
+            <option *ngFor="let option of devices" [value]="option?.id">{{ option?.deviceName }}</option>
+          </select>
+          <div class="text-center mt-3">
+              <button (click)="onSend()" class="btn btn-primary">ASSIGN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

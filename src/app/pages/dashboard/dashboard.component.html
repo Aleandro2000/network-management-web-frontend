@@ -12,6 +12,7 @@
           <th>Device Interface</th>
           <th>IP</th>
           <th>Device Name</th>
+          <th>Users</th>
         </tr>
       </thead>
       <tbody>
@@ -19,12 +20,31 @@
           <td>{{ device.deviceInterface }}</td>
           <td>{{ device.ip }}</td>
           <td>{{ device.deviceName }}</td>
+          <td>
+            <div *ngFor="let user of device.users">
+              {{user.email}}
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<div class="text-center">
+<div class="text-center my-2">
+  <a routerLink="/manageaccounts">
+    <button class="btn btn-primary">
+      MANAGE ACCOUNTS
+    </button>
+  </a>
+</div>
+<div class="text-center my-2">
+  <a routerLink="/devicemanager">
+    <button class="btn btn-primary">
+      DEVICE MANAGER
+    </button>
+  </a>
+</div>
+<div class="text-center my-2">
   <a href="http://localhost:58000/#/">
     <button class="btn btn-primary">
       SEE MORE DETAILS

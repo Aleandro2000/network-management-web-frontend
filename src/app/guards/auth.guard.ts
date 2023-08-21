@@ -6,7 +6,7 @@ import { getSession } from '../utils/utils';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(

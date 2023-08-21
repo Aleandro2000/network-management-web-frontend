@@ -4,8 +4,11 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AuthGuardGuard } from './guards/auth-guard.guard';
-import { PublicGuardGuard } from './guards/public-guard.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { PublicGuard } from './guards/public.guard';
+import { ManageaccountsComponent } from './pages/manageaccounts/manageaccounts.component';
+import { AdminGuard } from './guards/admin.guard';
+import { DevicemanagerComponent } from './pages/devicemanager/devicemanager.component';
 
 const routes: Routes = [
   {
@@ -16,17 +19,27 @@ const routes: Routes = [
   {
     path: "signin",
     component: SigninComponent,
-    canActivate: [PublicGuardGuard],
+    canActivate: [PublicGuard],
   },
   {
     path: "signup",
     component: SignupComponent,
-    canActivate: [PublicGuardGuard],
+    canActivate: [PublicGuard],
   },
   {
     path: "dashboard",
     component: DashboardComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "manageaccounts",
+    component: ManageaccountsComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: "devicemanager",
+    component: DevicemanagerComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: "**",

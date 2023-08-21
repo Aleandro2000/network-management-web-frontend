@@ -14,4 +14,11 @@ export class DeviceService {
   getDevices() {
     return this.http.get(`${environment.publicApiUrl}/devices/show`);
   }
+
+  getOrAddDevices(userId: number, deviceId: number) {
+    return this.http.post(`${environment.publicApiUrl}/user/add_or_get_device`, {
+      userId,
+      deviceId,
+    });
+  }
 }

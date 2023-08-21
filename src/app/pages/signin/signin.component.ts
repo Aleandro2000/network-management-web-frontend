@@ -22,7 +22,7 @@ export class SigninComponent implements OnInit {
   get email() {
     return this.signinForm.get("email");
   }
-  
+
   get password() {
     return this.signinForm.get("password");
   }
@@ -39,9 +39,10 @@ export class SigninComponent implements OnInit {
   onSignin(): void {
     if (!this.signinForm.invalid) {
       this.authService.signInService(this.signinForm.get("email")?.value, this.signinForm.get("password")?.value).subscribe(
-        response => {
+        (response: any) => {
           displayToast(messages.SIGN_IN_SUCCESSFULLY);
           setSession("jwt", response?.jwt);
+          setSession("user", JSON.stringify(response?.user));
           this.router.navigate(["dashboard"]);
         },
         _error => {
