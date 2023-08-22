@@ -3,8 +3,8 @@
     LOGOUT
   </button>
 </div>
-<div class="my-5">
-  <h2 class="text-center"><b>Device Table</b></h2>
+<div *ngIf="isAdmin" class="my-5">
+  <h2 class="text-center"><b>Devices Table</b></h2>
   <div class="table-responsive container mt-5">
     <table class="table table-bordered">
       <thead>
@@ -30,21 +30,42 @@
     </table>
   </div>
 </div>
-<div class="text-center my-2">
+<div class="my-5">
+  <h2 class="text-center"><b>Own Devices Table</b></h2>
+  <div class="table-responsive container mt-5">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Device Interface</th>
+          <th>IP</th>
+          <th>Device Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let device of ownDevices">
+          <td>{{ device.deviceInterface }}</td>
+          <td>{{ device.ip }}</td>
+          <td>{{ device.deviceName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="isAdmin" class="text-center my-2">
   <a routerLink="/manageaccounts">
     <button class="btn btn-primary">
       MANAGE ACCOUNTS
     </button>
   </a>
 </div>
-<div class="text-center my-2">
+<div *ngIf="isAdmin" class="text-center my-2">
   <a routerLink="/devicemanager">
     <button class="btn btn-primary">
       DEVICE MANAGER
     </button>
   </a>
 </div>
-<div class="text-center my-2">
+<div class="text-center mt-2 mb-5">
   <a href="http://localhost:58000/#/">
     <button class="btn btn-primary">
       SEE MORE DETAILS

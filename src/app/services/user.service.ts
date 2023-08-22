@@ -11,7 +11,7 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
-  getUsers() {
-    return this.http.get(`${environment.publicApiUrl}/user/show`);
+  getUsers(id?: any) {
+    return !id ? this.http.get(`${environment.publicApiUrl}/user/show`) : this.http.get(`${environment.publicApiUrl}/user/get/${id}`);
   }
 }
